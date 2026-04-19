@@ -1,0 +1,137 @@
+/* --- Reset & Base --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Georgia', serif;
+  background: #fdf8f2;
+  color: #1a1a1a;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Nav --- */
+header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #e8ddd0;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  color: #1a1a1a;
+}
+
+nav a {
+  text-decoration: none;
+  color: #1a1a1a;
+}
+
+nav a:hover { text-decoration: underline; }
+
+/* --- Hero --- */
+.hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 2rem;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 6vw, 4rem);
+  margin-bottom: 0.5rem;
+}
+
+.hero h2 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  color: #6b5d4f;
+  margin-bottom: 2.5rem;
+  font-weight: normal;
+}
+
+/* --- Shop Page --- */
+.shop {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  flex: 1;
+}
+
+.shop h1 {
+  font-size: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.product-card {
+  background: #fff;
+  border: 1px solid #e8ddd0;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: #f0e8de;
+}
+
+.product-card h2 {
+  font-size: 1.2rem;
+  padding: 1rem 1rem 0.25rem;
+}
+
+.product-card .price {
+  padding: 0 1rem 1rem;
+  color: #6b5d4f;
+  font-size: 1.1rem;
+}
+
+.product-card .btn {
+  margin: 0 1rem 1rem;
+}
+
+/* --- Button --- */
+.btn {
+  display: inline-block;
+  background: #1a1a1a;
+  color: #fdf8f2;
+  padding: 0.75rem 1.75rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  transition: background 0.2s;
+}
+
+.btn:hover { background: #3d3028; }
+
+/* --- Footer --- */
+footer {
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid #e8ddd0;
+  font-size: 0.85rem;
+  color: #999;
+}

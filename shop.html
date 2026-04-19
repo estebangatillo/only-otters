@@ -1,0 +1,26 @@
+async function checkout(product, color, size) {
+  const res = await fetch('/.netlify/functions/create-checkout', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ product, color, size }),
+  });
+  const data = await res.json();
+  if (data.url) window.location.href = data.url;
+}
+
+function buyTee() {
+  const color = document.getElementById('tee-color').value;
+  const size  = document.getElementById('tee-size').value;
+  const err   = document.getElementById('tee-error');
+  if (!color || !size) { err.textContent = 'Please select a color and size.'; return; }
+  err.textContent = '';
+  checkout('tshirt', color, size);
+}
+
+function buyTote() {
+  const color = document.getElementById('tote-color').value;
+  const err   = document.getElementById('tote-error');
+  if (!color) { err.textContent = 'Please select a color.'; return; }
+  err.textContent = '';
+  checkout('tote', color, null);
+}
