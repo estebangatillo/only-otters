@@ -1,26 +1,98 @@
-async function checkout(product, color, size) {
-  const res = await fetch('/.netlify/functions/create-checkout', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ product, color, size }),
-  });
-  const data = await res.json();
-  if (data.url) window.location.href = data.url;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop — Only Otters</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/" class="logo">Only Otters</a>
+      <a href="/shop.html">Shop</a>
+    </nav>
+  </header>
 
-function buyTee() {
-  const color = document.getElementById('tee-color').value;
-  const size  = document.getElementById('tee-size').value;
-  const err   = document.getElementById('tee-error');
-  if (!color || !size) { err.textContent = 'Please select a color and size.'; return; }
-  err.textContent = '';
-  checkout('tshirt', color, size);
-}
+  <main class="shop">
+    <h1>Shop</h1>
+    <div class="product-grid">
 
-function buyTote() {
-  const color = document.getElementById('tote-color').value;
-  const err   = document.getElementById('tote-error');
-  if (!color) { err.textContent = 'Please select a color.'; return; }
-  err.textContent = '';
-  checkout('tote', color, null);
-}
+      <!-- T-SHIRT -->
+      <div class="product-card">
+        <img src="images/tee.jpg" alt="Only Otters T-Shirt" />
+        <h2>Otter Tee</h2>
+        <p class="price">$27</p>
+        <p class="meta">Bella + Canvas 3001 · 100% combed ring-spun cotton · Made in USA</p>
+        <div class="selectors">
+          <select id="tee-color">
+            <option value="">— Color —</option>
+            <option value="Cardinal">Cardinal</option>
+            <option value="Kelly">Kelly</option>
+            <option value="White">White</option>
+          </select>
+          <select id="tee-size">
+            <option value="">— Size —</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+          </select>
+        </div>
+        <button class="btn" onclick="buyTee()">Buy Now</button>
+        <p id="tee-error" class="error-msg"></p>
+      </div>
+
+      <!-- TOTE -->
+      <div class="product-card">
+        <img src="images/tote.jpg" alt="Only Otters Tote Bag" />
+        <h2>Otter Tote</h2>
+        <p class="price">$25</p>
+        <p class="meta">Econscious EC8000 · Organic cotton · One size</p>
+        <div class="selectors">
+          <select id="tote-color">
+            <option value="">— Color —</option>
+            <option value="Oyster">Oyster</option>
+          </select>
+        </div>
+        <button class="btn" onclick="buyTote()">Buy Now</button>
+        <p id="tote-error" class="error-msg"></p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 Only Otters</p>
+  </footer>
+
+  <script>
+    async function checkout(product, color, size) {
+      const res = await fetch('/.netlify/functions/create-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ product, color, size }),
+      });
+      const data = await res.json();
+      if (data.url) window.location.href = data.url;
+    }
+
+    function buyTee() {
+      const color = document.getElementById('tee-color').value;
+      const size  = document.getElementById('tee-size').value;
+      const err   = document.getElementById('tee-error');
+      if (!color || !size) { err.textContent = 'Please select a color and size.'; return; }
+      err.textContent = '';
+      checkout('tshirt', color, size);
+    }
+
+    function buyTote() {
+      const color = document.getElementById('tote-color').value;
+      const err   = document.getElementById('tote-error');
+      if (!color) { err.textContent = 'Please select a color.'; return; }
+      err.textContent = '';
+      checkout('tote', color, null);
+    }
+  </script>
+</body>
+</html>
