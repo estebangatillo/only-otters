@@ -20,7 +20,7 @@
 
       <!-- T-SHIRT -->
       <div class="product-card">
-        <img src="images/tee.jpg" alt="Only Otters T-Shirt" />
+        <img src="https://files.cdn.printful.com/files/5e5/5e5e396de7a86d3ee05942747901d481_preview.png" alt="Only Otters T-Shirt" />
         <h2>Otter Tee</h2>
         <p class="price">$27</p>
         <p class="meta">Bella + Canvas 3001 · 100% combed ring-spun cotton · Made in USA</p>
@@ -45,7 +45,7 @@
 
       <!-- TOTE -->
       <div class="product-card">
-        <img src="images/tote.jpg" alt="Only Otters Tote Bag" />
+        <img src="https://files.cdn.printful.com/files/a55/a556ee7f84027566502bb3248c87ae44_preview.png" alt="Only Otters Tote Bag" />
         <h2>Otter Tote</h2>
         <p class="price">$25</p>
         <p class="meta">Econscious EC8000 · Organic cotton · One size</p>
@@ -68,13 +68,30 @@
 
   <script>
     async function checkout(product, color, size) {
-      const res = await fetch('/.netlify/functions/create-checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ product, color, size }),
-      });
-      const data = await res.json();
-      if (data.url) window.location.href = data.url;
+      try {
+        const res = await fetch('/.netlify/functions/create-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ product, color, size }),
+        });
+
+        if (!res.ok) {
+          const text = await res.text();
+          console.error('Function error:', text);
+          alert('Something went wrong: ' + text);
+          return;
+        }
+
+        const data = await res.json();
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          alert('No checkout URL returned. Check function logs.');
+        }
+      } catch (err) {
+        console.error('Fetch error:', err);
+        alert('Could not reach checkout. Are you online?');
+      }
     }
 
     function buyTee() {
