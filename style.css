@@ -176,3 +176,38 @@ footer {
   margin-bottom: 1rem;
   color: #333;
 }
+
+
+/* Scrolling image strip */
+.scroll-strip {
+  width: 100%;
+  overflow: hidden;
+  background: #f5ede3;
+  padding: 1.5rem 0;
+  border-top: 1px solid #e8ddd0;
+  border-bottom: 1px solid #e8ddd0;
+}
+
+.scroll-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  animation: scroll-left 30s linear infinite;
+}
+
+.scroll-track img {
+  height: 220px;
+  width: 220px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.scroll-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
