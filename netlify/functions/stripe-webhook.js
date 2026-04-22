@@ -56,7 +56,6 @@ exports.handler = async (event) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      external_id: session.id.slice(-32),
       recipient: {
         name,
         address1:     addr.line1,
