@@ -1,7 +1,7 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const TEE_PRICE_ID  = 'price_1TNjPBRywbMDnJmpzx2UmLse';
-const TOTE_PRICE_ID = 'price_1TNlT8RywbMDnJmpJ4fHKHOse';
+const TOTE_PRICE_ID = 'price_1TNlT8RywbMDnJmpJ4fHKHOs';
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
