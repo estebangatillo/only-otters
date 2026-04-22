@@ -72,9 +72,10 @@ exports.handler = async (event) => {
   });
 
   const pfResult = await pfResponse.json();
-  if (!pfResponse.ok) {
-    console.error('Printful error:', JSON.stringify(pfResult));
-    return { statusCode: 500, body: 'Printful order failed' };
+if (!pfResponse.ok) {
+    console.error('Printful error status:', pfResponse.status);
+    console.error('Printful error body:', JSON.stringify(pfResult));
+    return { statusCode: 500, body: 'Printful order failed: ' + JSON.stringify(pfResult) };
   }
 
   console.log('Printful order created:', pfResult.result.id);
