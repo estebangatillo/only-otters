@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Only Otters</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/" class="logo">Only Otters</a>
+      <div class="nav-links">
+        <a href="/shop.html">Shop</a>
+        <a href="/about.html">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="product-page" id="product-page">
+    <a href="/shop.html" class="back-link">← All products</a>
+
+    <div class="product-layout">
+      <div class="product-image-col">
+        <img id="product-img" src="" alt="" />
+      </div>
+
+      <div class="product-detail-col">
+        <h1 id="product-name"></h1>
+        <p id="product-tagline"></p>
+        <p id="product-price" class="product-price-lg"></p>
+        <p id="product-blank" class="product-blank"></p>
+
+        <div class="selector-group" id="color-group">
+          <p class="selector-label">Color: <span id="color-name"></span></p>
+          <div class="swatches" id="swatches"></div>
+        </div>
+
+        <div class="selector-group" id="size-group">
+          <p class="selector-label">Size</p>
+          <div class="size-btns" id="size-btns"></div>
+        </div>
+
+        <button class="btn btn-full" id="buy-btn" onclick="handleBuy()">Buy Now</button>
+        <p id="buy-error" class="error-msg"></p>
+
+        <p class="otter-note">By purchasing you acknowledge there are only otters. You're not joining a cult, per se, but you're not <em>not</em> joining a cult either.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 Only Otters · There are only otters.</p>
+  </footer>
+
+  <script src="products.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get('id');
+    const product = PRODUCTS.find(p => p.id === productId);
+
+    if (!product) {
+      window.location.href = '/shop.html';
+    }
+
+    document.title = `${product.name} — Only Otters`;
+
+    let selectedColor = product.colors[0];
+    let selectedSize = null;
+
+    // Populate static fields
+    document.getElementById('product-name').textContent = product.name;
+    document.getElementById('product-tagline').textContent = product.tagline;
+    document.getElementById('product-price').textContent = `$${product.price}`;
+    document.getElementById('product-blank').textContent = product.blank;
+    document.getElementById('product-img').src = selectedColor.image;
+    document.getElementById('product-img').alt = product.name;
+    document.getElementById('color-name').textContent = selectedColor.name;
+
+    // Hide color selector if only one color
+    if (product.colors.length === 1) {
+      document.getElementById('color-group').style.display = 'none';
+    }
+
+    // Build color swatches
+    const swatchContainer = document.getElementById('swatches');
+    product.colors.forEach(color => {
+      const swatch = document.createElement('button');
+      swatch.className = 'swatch' + (color === selectedColor ? ' active' : '');
+      swatch.style.background = color.swatch;
+      if (color.swatch === '#FFFFFF') swatch.style.border = '1.5px solid #ccc';
+      swatch.title = color.name;
+      swatch.onclick = () => {
+        selectedColor = color;
+        document.getElementById('product-img').src = color.image;
+        document.getElementById('color-name').textContent = color.name;
+        document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+        swatch.classList.add('active');
+      };
+      swatchContainer.appendChild(swatch);
+    });
+
+    // Build size buttons
+    const sizeBtns = document.getElementById('size-btns');
+    product.sizes.forEach(size => {
+      const btn = document.createElement('button');
+      btn.className = 'size-btn';
+      btn.textContent = size;
+      btn.onclick = () => {
+        selectedSize = size;
+        document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      };
+      sizeBtns.appendChild(btn);
+    });
+
+    // Hide size selector for one-size products
+    if (product.sizes.length === 1 && product.sizes[0] === 'One Size') {
+      document.getElementById('size-group').style.display = 'none';
+      selectedSize = 'One Size';
+    }
+
+    async function handleBuy() {
+      const err = document.getElementById('buy-error');
+      if (!selectedSize) {
+        err.textContent = 'Please select a size.';
+        return;
+      }
+      err.textContent = '';
+
+      const variantId = selectedColor.variants[selectedSize];
+      if (!variantId) {
+        err.textContent = 'That combination is unavailable.';
+        return;
+      }
+
+      try {
+        const res = await fetch('/.netlify/functions/create-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            product: product.id,
+            color: selectedColor.name,
+            size: selectedSize,
+            priceId: product.priceId,
+            variantId: variantId
+          }),
+        });
+
+        if (!res.ok) {
+          const text = await res.text();
+          err.textContent = 'Something went wrong: ' + text;
+          return;
+        }
+
+        const data = await res.json();
+        if (data.url) window.location.href = data.url;
+      } catch (e) {
+        err.textContent = 'Could not reach checkout. Please try again.';
+      }
+    }
+  </script>
+</body>
+</html>

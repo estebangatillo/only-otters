@@ -8,109 +8,44 @@
 </head>
 <body>
   <header>
-<nav>
-  <a href="/" class="logo">Only Otters</a>
-  <a href="/shop.html">Shop</a>
-  <a href="/about.html">About</a>
-</nav>
+    <nav>
+      <a href="/" class="logo">Only Otters</a>
+      <div class="nav-links">
+        <a href="/shop.html">Shop</a>
+        <a href="/about.html">About</a>
+      </div>
+    </nav>
   </header>
 
   <main class="shop">
     <h1>Shop</h1>
-    <div class="product-grid">
-
-      <!-- T-SHIRT -->
-      <div class="product-card">
-        <img src="https://files.cdn.printful.com/files/5e5/5e5e396de7a86d3ee05942747901d481_preview.png" alt="Only Otters T-Shirt" />
-        <h2>Otter Tee</h2>
-        <p class="price">$27</p>
-        <p class="meta">Bella + Canvas 3001 · 100% combed ring-spun cotton · Made in USA</p>
-        <div class="selectors">
-          <select id="tee-color">
-            <option value="">— Color —</option>
-            <option value="Cardinal">Cardinal</option>
-            <option value="Kelly">Kelly</option>
-            <option value="White">White</option>
-          </select>
-          <select id="tee-size">
-            <option value="">— Size —</option>
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-          </select>
-        </div>
-        <button class="btn" onclick="buyTee()">Buy Now</button>
-        <p id="tee-error" class="error-msg"></p>
-      </div>
-
-      <!-- TOTE -->
-      <div class="product-card">
-        <img src="https://files.cdn.printful.com/files/a55/a556ee7f84027566502bb3248c87ae44_preview.png" alt="Only Otters Tote Bag" />
-        <h2>Otter Tote</h2>
-        <p class="price">$25</p>
-        <p class="meta">Econscious EC8000 · Organic cotton · One size</p>
-        <div class="selectors">
-          <select id="tote-color">
-            <option value="">— Color —</option>
-            <option value="Oyster">Oyster</option>
-          </select>
-        </div>
-        <button class="btn" onclick="buyTote()">Buy Now</button>
-        <p id="tote-error" class="error-msg"></p>
-      </div>
-
-    </div>
+    <div class="product-grid" id="product-grid"></div>
   </main>
 
   <footer>
-    <p>© 2026 Only Otters</p>
+    <p>© 2026 Only Otters · There are only otters.</p>
   </footer>
 
+  <script src="products.js"></script>
   <script>
-    async function checkout(product, color, size) {
-      try {
-        const res = await fetch('/.netlify/functions/create-checkout', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ product, color, size }),
-        });
+    const grid = document.getElementById('product-grid');
 
-        if (!res.ok) {
-          const text = await res.text();
-          console.error('Function error:', text);
-          alert('Something went wrong: ' + text);
-          return;
-        }
-
-        const data = await res.json();
-        if (data.url) {
-          window.location.href = data.url;
-        } else {
-          alert('No checkout URL returned. Check function logs.');
-        }
-      } catch (err) {
-        console.error('Fetch error:', err);
-        alert('Could not reach checkout. Are you online?');
-      }
-    }
-
-    function buyTee() {
-      const color = document.getElementById('tee-color').value;
-      const size  = document.getElementById('tee-size').value;
-      const err   = document.getElementById('tee-error');
-      if (!color || !size) { err.textContent = 'Please select a color and size.'; return; }
-      err.textContent = '';
-      checkout('tshirt', color, size);
-    }
-
-    function buyTote() {
-      const color = document.getElementById('tote-color').value;
-      const err   = document.getElementById('tote-error');
-      if (!color) { err.textContent = 'Please select a color.'; return; }
-      err.textContent = '';
-      checkout('tote', color, null);
-    }
+    PRODUCTS.forEach(product => {
+      const firstColor = product.colors[0];
+      const card = document.createElement('a');
+      card.href = `/product.html?id=${product.id}`;
+      card.className = 'product-card';
+      card.innerHTML = `
+        <div class="product-img-wrap">
+          <img src="${firstColor.image}" alt="${product.name}" loading="lazy" />
+        </div>
+        <div class="product-info">
+          <p class="product-name">${product.name}</p>
+          <p class="product-price">$${product.price}</p>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
   </script>
 </body>
 </html>
