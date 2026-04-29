@@ -8,22 +8,22 @@ const PRODUCTS = [
     blank: 'Bella + Canvas 3001 · 100% combed ring-spun cotton · Made in USA',
     colors: [
       {
-        name: 'Cardinal',
-        swatch: '#9B2335',
-        image: 'https://files.cdn.printful.com/files/5e5/5e5e396de7a86d3ee05942747901d481_preview.png',
-        variants: { S: 5270164594, M: 5270164595, L: 5270164596, XL: 5270164597 }
+        name: 'Heather Grass Green',
+        swatch: '#7B9E5A',
+        image: 'https://files.cdn.printful.com/files/e3a/e3a9c6eb4203f4f9c114e8ff5f68f367_preview.png',
+        variants: { S: 5286714686, M: 5286714688, L: 5286714689, XL: 5286714690 }
       },
       {
-        name: 'Kelly',
-        swatch: '#4F7942',
-        image: 'https://files.cdn.printful.com/files/a8c/a8c1b4a11309c74fcdf1e547f0e1d208_preview.png',
-        variants: { S: 5270164620, M: 5270164621, L: 5270164622, XL: 5270164623 }
+        name: 'Orange',
+        swatch: '#E8621A',
+        image: 'https://files.cdn.printful.com/files/ea0/ea01da7b25781f289dffa1dd69717fc5_preview.png',
+        variants: { S: 5286714692, M: 5286714693, L: 5286714695, XL: 5286714696 }
       },
       {
         name: 'White',
         swatch: '#FFFFFF',
-        image: 'https://files.cdn.printful.com/files/b2a/b2a52b1fbfabca44397df70afff4ee8e_preview.png',
-        variants: { S: 5270164651, M: 5270164652, L: 5270164653, XL: 5270164654 }
+        image: 'https://files.cdn.printful.com/files/cd1/cd165709da2c2a5145b390f4d3bda8ee_preview.png',
+        variants: { S: 5286714697, M: 5286714698, L: 5286714700, XL: 5286714701 }
       }
     ],
     sizes: ['S', 'M', 'L', 'XL']
@@ -108,7 +108,47 @@ const PRODUCTS = [
     ],
     sizes: ['S', 'M', 'L', 'XL']
   },
-{
+  {
+    id: 'the-drift',
+    name: 'The Drift',
+    tagline: 'Effortless. Like an otter on a river.',
+    price: 27,
+    priceId: 'price_1TNjPBRywbMDnJmpzx2UmLse',
+    blank: 'Bella + Canvas 3480 · Unisex jersey tank · Made in USA',
+    colors: [
+      {
+        name: 'Athletic Heather',
+        swatch: '#B0AEA8',
+        image: 'https://files.cdn.printful.com/files/1f5/1f5e94ab778fa5c025a7efc6f7893df8_preview.png',
+        variants: { S: 5285793482, M: 5285793483, L: 5285793484, XL: 5285793485 }
+      }
+    ],
+    sizes: ['S', 'M', 'L', 'XL']
+  },
+  {
+    id: 'the-current',
+    name: 'The Current',
+    tagline: 'Flow with it. There are only otters.',
+    price: 27,
+    priceId: 'price_1TNjPBRywbMDnJmpzx2UmLse',
+    blank: 'Next Level 6733 · Ladies\' triblend racerback tank',
+    colors: [
+      {
+        name: 'Vintage Turquoise',
+        swatch: '#4AACB0',
+        image: 'https://files.cdn.printful.com/files/6df/6df1e095af0b9aa3991eba0d64419f00_preview.png',
+        variants: { XS: 5286710949, S: 5286710950, M: 5286710951, L: 5286710952 }
+      },
+      {
+        name: 'Heather White',
+        swatch: '#F0EEE9',
+        image: 'https://files.cdn.printful.com/files/4d4/4d43d025500131c2f8144f8aa7d7ddde_preview.png',
+        variants: { XS: 5286710953, S: 5286710954, M: 5286710955, L: 5286710956 }
+      }
+    ],
+    sizes: ['XS', 'S', 'M', 'L']
+  },
+  {
     id: 'otter-tote',
     name: 'The Vessel',
     tagline: 'Carry your things. And the truth.',
