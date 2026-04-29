@@ -24,38 +24,39 @@
   </main>
 
   <div class="scroll-strip">
-  <div class="scroll-track">
-    <!-- The Gathering -->
-    <img src="https://files.cdn.printful.com/files/5e5/5e5e396de7a86d3ee05942747901d481_preview.png" alt="The Gathering - Cardinal" />
-    <img src="https://files.cdn.printful.com/files/a8c/a8c1b4a11309c74fcdf1e547f0e1d208_preview.png" alt="The Gathering - Kelly" />
-    <img src="https://files.cdn.printful.com/files/b2a/b2a52b1fbfabca44397df70afff4ee8e_preview.png" alt="The Gathering - White" />
-    <!-- The Declaration -->
-    <img src="https://files.cdn.printful.com/files/1a1/1a199df86400fdb7292d746a4a8561e9_preview.png" alt="The Declaration - Mint" />
-    <img src="https://files.cdn.printful.com/files/71c/71c4cb61395df80b89e701100f2cadef_preview.png" alt="The Declaration - White" />
-    <!-- The Orbit -->
-    <img src="https://files.cdn.printful.com/files/32a/32a095cb46c9f6f97e4a2a4c25927ffe_preview.png" alt="The Orbit - Grey" />
-    <img src="https://files.cdn.printful.com/files/0db/0db22e01ade69612f3b8b0019e1aaf88_preview.png" alt="The Orbit - White" />
-    <!-- The Soloist -->
-    <img src="https://files.cdn.printful.com/files/f56/f56bf8017cca5047fcbb52cf24e80072_preview.png" alt="The Soloist" />
-    <!-- The Gathering Her -->
-    <img src="https://files.cdn.printful.com/files/1d2/1d29865d79756381535b7462a33ef568_preview.png" alt="The Gathering - Her" />
-    <!-- The Vessel -->
-    <img src="https://files.cdn.printful.com/files/fa4/fa4a5e0282ef8fe2f5692d36b40e4590_preview.png" alt="The Vessel - Oyster" />
-    <img src="https://files.cdn.printful.com/files/a55/a556ee7f84027566502bb3248c87ae44_preview.png" alt="The Vessel - Black" />
-    <!-- Repeat for seamless loop -->
-    <img src="https://files.cdn.printful.com/files/5e5/5e5e396de7a86d3ee05942747901d481_preview.png" alt="The Gathering - Cardinal" />
-    <img src="https://files.cdn.printful.com/files/a8c/a8c1b4a11309c74fcdf1e547f0e1d208_preview.png" alt="The Gathering - Kelly" />
-    <img src="https://files.cdn.printful.com/files/b2a/b2a52b1fbfabca44397df70afff4ee8e_preview.png" alt="The Gathering - White" />
-    <img src="https://files.cdn.printful.com/files/1a1/1a199df86400fdb7292d746a4a8561e9_preview.png" alt="The Declaration - Mint" />
-    <img src="https://files.cdn.printful.com/files/71c/71c4cb61395df80b89e701100f2cadef_preview.png" alt="The Declaration - White" />
-    <img src="https://files.cdn.printful.com/files/32a/32a095cb46c9f6f97e4a2a4c25927ffe_preview.png" alt="The Orbit - Grey" />
-    <img src="https://files.cdn.printful.com/files/0db/0db22e01ade69612f3b8b0019e1aaf88_preview.png" alt="The Orbit - White" />
-    <img src="https://files.cdn.printful.com/files/f56/f56bf8017cca5047fcbb52cf24e80072_preview.png" alt="The Soloist" />
-    <img src="https://files.cdn.printful.com/files/1d2/1d29865d79756381535b7462a33ef568_preview.png" alt="The Gathering - Her" />
-    <img src="https://files.cdn.printful.com/files/fa4/fa4a5e0282ef8fe2f5692d36b40e4590_preview.png" alt="The Vessel - Oyster" />
-    <img src="https://files.cdn.printful.com/files/a55/a556ee7f84027566502bb3248c87ae44_preview.png" alt="The Vessel - Black" />
-  </div>
+  <div class="scroll-track" id="scroll-track"></div>
 </div>
+
+<script>
+  const scrollImages = [
+    { url: 'https://files.cdn.printful.com/files/e3a/e3a9c6eb4203f4f9c114e8ff5f68f367_preview.png', alt: 'The Gathering - Green' },
+    { url: 'https://files.cdn.printful.com/files/ea0/ea01da7b25781f289dffa1dd69717fc5_preview.png', alt: 'The Gathering - Orange' },
+    { url: 'https://files.cdn.printful.com/files/cd1/cd165709da2c2a5145b390f4d3bda8ee_preview.png', alt: 'The Gathering - White' },
+    { url: 'https://files.cdn.printful.com/files/1a1/1a199df86400fdb7292d746a4a8561e9_preview.png', alt: 'The Declaration - Mint' },
+    { url: 'https://files.cdn.printful.com/files/71c/71c4cb61395df80b89e701100f2cadef_preview.png', alt: 'The Declaration - White' },
+    { url: 'https://files.cdn.printful.com/files/32a/32a095cb46c9f6f97e4a2a4c25927ffe_preview.png', alt: 'The Orbit - Grey' },
+    { url: 'https://files.cdn.printful.com/files/0db/0db22e01ade69612f3b8b0019e1aaf88_preview.png', alt: 'The Orbit - White' },
+    { url: 'https://files.cdn.printful.com/files/f56/f56bf8017cca5047fcbb52cf24e80072_preview.png', alt: 'The Soloist' },
+    { url: 'https://files.cdn.printful.com/files/1d2/1d29865d79756381535b7462a33ef568_preview.png', alt: 'The Gathering Her' },
+    { url: 'https://files.cdn.printful.com/files/1f5/1f5e94ab778fa5c025a7efc6f7893df8_preview.png', alt: 'The Drift' },
+    { url: 'https://files.cdn.printful.com/files/6df/6df1e095af0b9aa3991eba0d64419f00_preview.png', alt: 'The Current - Turquoise' },
+    { url: 'https://files.cdn.printful.com/files/4d4/4d43d025500131c2f8144f8aa7d7ddde_preview.png', alt: 'The Current - White' },
+    { url: 'https://files.cdn.printful.com/files/fa4/fa4a5e0282ef8fe2f5692d36b40e4590_preview.png', alt: 'The Vessel - Oyster' },
+    { url: 'https://files.cdn.printful.com/files/a55/a556ee7f84027566502bb3248c87ae44_preview.png', alt: 'The Vessel - Black' },
+  ];
+
+  // Shuffle
+  const shuffled = scrollImages.sort(() => Math.random() - 0.5);
+
+  // Double for seamless loop
+  const track = document.getElementById('scroll-track');
+  [...shuffled, ...shuffled].forEach(img => {
+    const el = document.createElement('img');
+    el.src = img.url;
+    el.alt = img.alt;
+    track.appendChild(el);
+  });
+</script>
 
   <footer>
     <p>© 2026 Only Otters · There are only otters.</p>
