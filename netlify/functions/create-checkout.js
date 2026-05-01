@@ -24,6 +24,9 @@ exports.handler = async (event) => {
     shipping_address_collection: {
       allowed_countries: ['US', 'CA', 'GB', 'AU'],
     },
+    phone_number_collection: {
+      enabled: true,
+    },
     success_url: 'https://only-otters.com/success.html',
     cancel_url: 'https://only-otters.com/shop.html',
   });

@@ -149,6 +149,23 @@ const PRODUCTS = [
     sizes: ['XS', 'S', 'M', 'L']
   },
   {
+    id: 'the-confluence',
+    name: 'The Confluence',
+    tagline: 'Premium cotton. Where otters meet.',
+    price: 27,
+    priceId: 'price_1TNjPBRywbMDnJmpzx2UmLse',
+    blank: 'Cotton Heritage MC1790 · Men\'s premium tank',
+    colors: [
+      {
+        name: 'Mint',
+        swatch: '#A8D8C8',
+        image: 'https://files.cdn.printful.com/files/bc4/bc4a0be0fdd5b66b71538d1d31f8b52b_preview.png',
+        variants: { S: 5289117613, M: 5289117614, L: 5289117615, XL: 5289117616 }
+      }
+    ],
+    sizes: ['S', 'M', 'L', 'XL']
+  },
+  {
     id: 'otter-tote',
     name: 'The Vessel',
     tagline: 'Carry your things. And the truth.',
